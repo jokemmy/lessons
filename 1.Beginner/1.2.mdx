@@ -1,0 +1,109 @@
+
+import { Flex, Box } from 'rebass';
+import { Appear, Step } from 'mdx-deck'
+
+
+# 前端养成
+## 1.1 基础类型
+
+---
+
+### 原始类型
+
+<Flex flexWrap='wrap'>
+  <Box p={2} width={1/3}>
+    Number
+  </Box>
+  <Box p={2} width={1/3}>
+    Object
+  </Box>
+  <Box p={2} width={1/3}>
+    String
+  </Box>
+  <Box p={2} width={1/3}>
+    Boolean
+  </Box>
+  <Box p={2} width={1/3}>
+    null
+  </Box>
+  <Box p={2} width={1/3}>
+    undefined
+  </Box>
+  <Box p={2} width={1/3}>
+    Symbol<span style={{ opacity: 0.5 }}>(ES6)</span>
+  </Box>
+</Flex>
+
+---
+
+### 对象类型
+
+<Appear>
+  <Flex>
+    <Box p={2} width={1/3}>
+      Object
+    </Box>
+    <Box p={2} width={1/3}>
+      Array
+    </Box>
+    <Box p={2} width={1/3}>
+      Function
+    </Box>
+  </Flex>
+  <Flex>
+    <Box p={2} width={1/3}>
+      <del>全局</del>
+    </Box>
+    <Box p={2} width={1/3}>
+      <del>宿主</del>
+    </Box>
+    <Box p={2} width={1/3}>
+      <del>本地</del>
+    </Box>
+  </Flex>
+</Appear>
+
+---
+
+### Object
+
+Date / RegExp / Funtion / Array / Error ...
+
+---
+
+### 特殊值
+
+<Appear>
+  <div>
+    <Appear><span>null</span><span>(代码级)</span></Appear>
+    <Appear><span>undefined</span><span>(系统级)</span></Appear>
+  </div>
+  <div></div>
+  <div>NaN / Infinity / -Infinity</div>
+</Appear>
+
+---
+
+### 类型判断 typeof
+
+<div>
+  {[
+    [ 3, 'number' ], [{ toString: function() { return '{}' }}, 'object' ],
+    [ '', 'string' ], [ true, 'boolean' ], [ null, 'object' ],
+    [ undefined, 'undefined' ], [ Symbol( 'symbol' ), 'symbol' ],
+    [ Object.assign([], { toString: function() { return '[]' }}), 'object' ],
+    [ Object.assign( function() {}, { toString: function() { return 'function() {}' }}), 'function' ]
+  ].map(([ value, type ], i ) => {
+    return (
+      <Flex key={i} p={1} alignItems="center" width="60vw">
+        typeof {String( value )} === '{type}'
+        <Box mx='auto' />
+        {String( typeof value === type )}
+      </Flex>
+    );
+  })}
+</div>
+
+---
+
+### 对象类型判断 instanceof
