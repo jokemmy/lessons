@@ -89,7 +89,12 @@ null / undefined 是自有类型中唯一的成员
 
 ### 类型判断 typeof
 
-<Prism language="js" customStyle={{ fontSize: 24 }}>{`
+
+
+<Prism
+  language="js"
+  highLightLines={[1,2,3]}
+  customStyle={{ fontSize: 24 }}>{`
 typeof 3 === 'number'                        // ${typeof 3 === 'number'}
 typeof {} === 'object'                       // ${typeof {} === 'object'}
 typeof '' === 'string'                       // ${typeof '' === 'string'}

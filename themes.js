@@ -3,7 +3,7 @@ import { Fragment } from 'react'
 import { ThemeProvider } from 'emotion-theming'
 import { MDXProvider } from '@mdx-js/react'
 import { condensed, aspect, syntaxHighlighterPrism } from '@mdx-deck/themes'
-import { okaidia } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { xonokai } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 
 const DefaultProvider = props => <Fragment>{props.children}</Fragment>
@@ -26,8 +26,7 @@ export const themes = [{
       background: 'black',
     },
     prism: {
-      className: 'okaidia',
-      style: okaidia
+      style: xonokai
     }
   },
   syntaxHighlighterPrism,
