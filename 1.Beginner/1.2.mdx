@@ -1,11 +1,11 @@
 
 import { Flex, Box } from 'rebass';
-import { Appear, Step } from 'mdx-deck'
-import Prism from 'components/Prism'
+import { Appear } from '@mdx-deck/components'
+import { Code } from '@components/Prism'
 
 
 # 前端养成
-## 1.1 基础类型
+## 1.1 类型与变量
 
 ---
 
@@ -70,6 +70,11 @@ import Prism from 'components/Prism'
 
 Date / RegExp / Funtion / Array / Error ...
 
+```js
+{}       // 这是一个空对象
+{ x: 1 } // 这个对象有一个属性 x 值为 1
+```
+
 ---
 
 ### 特殊值
@@ -91,10 +96,8 @@ null / undefined 是自有类型中唯一的成员
 
 
 
-<Prism
-  language="js"
-  highLightLines={[1,2,3]}
-  customStyle={{ fontSize: 24 }}>{`
+<Code language="js" highLightLines={[5]}>
+{`
 typeof 3 === 'number'                        // ${typeof 3 === 'number'}
 typeof {} === 'object'                       // ${typeof {} === 'object'}
 typeof '' === 'string'                       // ${typeof '' === 'string'}
@@ -104,7 +107,8 @@ typeof undefined === 'undefined'             // ${typeof undefined === 'undefine
 typeof Symbol( 'symbol' ) === 'symbol'       // ${typeof Symbol( 'symbol' ) === 'symbol'}
 typeof [] === 'object'                       // ${typeof [] === 'object'}
 typeof function() {} === 'function'          // ${typeof function() {} === 'function'}
-`}</Prism>
+`}
+</Code>
 
 ---
 
@@ -115,4 +119,135 @@ function Foo() {}
 var foo = new Foo()
 console.log( foo instanceof Foo ) // true
 ```
+---
 
+### 变量和直接量
+
+---
+
+### 直接量
+直接出现在程序中的值叫做直接量
+
+```js
+3.14
+'Hello'
+true
+null
+.333333333333333333
+```
+
+---
+
+### 类型的转换
+在JS中取值类型很灵活，所以学会转换很重要
+
+---
+
+### 隐式类型转换
+运算时会自动进行隐式类型转换
+
+<Code language="js">
+{`
+10 + ''           //   ${JSON.stringify( 10 + '' )}
+!!100             //   ${String( !!100 )}
+10 - ''           //   ${String( 10 - 'x' )}
+null + '-object'  //   ${JSON.stringify( null + '-object' )}
+// 一元运算
+var x = '10';
++x                //   10
+!!x               //   true
+~~x               //   10
+`}
+</Code>
+
+---
+
+### 显式类型转换
+使用函数显式转换
+
+```js
+Number( '3' )              //  3
+String( false )            //  "false"
+Boolean([])                //  true
+Object(3)                  //  new Number(3)
+parseInt( '1' )            //  1
+parseFloat( '0.1' )        //  0.1
+(17).toString(2)           //  "10001"
+(1234.5678).toFixed(2)     //  "1234.57"
+(1234.5678).toFixed(0)     //  "1234"
+```
+---
+
+### 对象转换为原始值
+对象可以通过函数转换类型
+
+```js
+({ x: 1 }).toString()           //  "[object Object]"
+[ 1, 2, 3 ].toString()          //  "1,2,3“
+(function() {}).toString()      //  "function() {}"
+new Date(2010,0,1).valueOf()   //  1262275200000
+```
+
+---
+
+### 变量
+
+变量是一个值的符号名称，同时也是一个内存空间的引用
+
+访问变量可以就可以访问到里面的值
+
+---
+
+### 声明变量
+使用 var 关键词来声明变量
+
+```js
+var s = 'Hello World';    // 声明变量同时赋初始值
+var s, b;                 // 一个 var 声明多个变量
+var s = 1, b = 2;         // 一个 var 声明多个变量同时赋值
+
+// ES6 let / const
+```
+
+---
+
+### 变量是无类型的
+变量可以被赋予任何类型的值
+
+```js
+var s = 'Hello World';
+s = 3.14
+s = true
+s = ''
+```
+
+---
+
+### 作用域
+一个变量的作用域是程序中定义这个变量的区域
+
+```js
+var scope = "global";     //  全局变量
+function getScope() {
+  var scope = 'local';    //  局部变量
+  return scope;           //  返回的是局部变量而不是全局变量
+}
+getScope();               //  “local”
+
+```
+
+---
+
+### 声明提前
+
+---
+
+### 作为属性
+
+---
+
+### 作用域链
+
+---
+
+### 下一节 运算符
