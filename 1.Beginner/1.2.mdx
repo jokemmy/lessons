@@ -1,11 +1,9 @@
 
 import { Flex, Box } from 'rebass';
 import { Appear } from '@mdx-deck/components'
-import { Code } from '@components/Prism'
 
 
-# 前端养成
-## 1.1 类型与变量
+## 1.2 类型与变量
 
 ---
 
@@ -88,16 +86,13 @@ null / undefined 是自有类型中唯一的成员
 
 ### 全局属性
 
-<div>NaN / Infinity / -Infinity</div>
+undefined / NaN / Infinity
 
 ---
 
 ### 类型判断 typeof
 
-
-
-<Code language="js" highLightLines={[5]}>
-{`
+```js highLightLines=5
 typeof 3 === 'number'                        // ${typeof 3 === 'number'}
 typeof {} === 'object'                       // ${typeof {} === 'object'}
 typeof '' === 'string'                       // ${typeof '' === 'string'}
@@ -107,8 +102,7 @@ typeof undefined === 'undefined'             // ${typeof undefined === 'undefine
 typeof Symbol( 'symbol' ) === 'symbol'       // ${typeof Symbol( 'symbol' ) === 'symbol'}
 typeof [] === 'object'                       // ${typeof [] === 'object'}
 typeof function() {} === 'function'          // ${typeof function() {} === 'function'}
-`}
-</Code>
+```
 
 ---
 
@@ -117,16 +111,12 @@ typeof function() {} === 'function'          // ${typeof function() {} === 'func
 ```js
 function Foo() {}
 var foo = new Foo()
-console.log( foo instanceof Foo ) // true
+foo instanceof Foo    // true
 ```
 ---
 
-### 变量和直接量
-
----
-
 ### 直接量
-直接出现在程序中的值叫做直接量
+程序中直接使用的数据
 
 ```js
 3.14
@@ -146,8 +136,7 @@ null
 ### 隐式类型转换
 运算时会自动进行隐式类型转换
 
-<Code language="js">
-{`
+```js
 10 + ''           //   ${JSON.stringify( 10 + '' )}
 !!100             //   ${String( !!100 )}
 10 - ''           //   ${String( 10 - 'x' )}
@@ -157,8 +146,7 @@ var x = '10';
 +x                //   10
 !!x               //   true
 ~~x               //   10
-`}
-</Code>
+```
 
 ---
 
@@ -182,10 +170,10 @@ parseFloat( '0.1' )        //  0.1
 对象可以通过函数转换类型
 
 ```js
-({ x: 1 }).toString()           //  "[object Object]"
-[ 1, 2, 3 ].toString()          //  "1,2,3“
-(function() {}).toString()      //  "function() {}"
-new Date(2010,0,1).valueOf()   //  1262275200000
+({ x: 1 }).toString()           //  ${JSON.stringify(({ x: 1 }).toString())}
+[ 1, 2, 3 ].toString()          //  ${JSON.stringify([ 1, 2, 3 ].toString())}
+(function() {}).toString()      //  ${JSON.stringify((function(){}).toString())}
+new Date(2010,0,1).valueOf()    //  ${new Date(2010,0,1).valueOf()}
 ```
 
 ---
@@ -224,6 +212,27 @@ s = ''
 ---
 
 ### 作用域
+花括号内的每一段代码都具有各自的作用域，而且变量在声明它们的代码段之外是不可见的
+
+---
+
+### 作用域外不可见
+
+```js
+函数
+
+function bigScope() {
+  var i = 1;
+  console.log( i );
+}
+bigScope();           // 1
+// 控制台打印
+console.log( i );     // 发生 ReferenceError 错误: i is not defined
+```
+
+---
+
+### 变量与作用域
 一个变量的作用域是程序中定义这个变量的区域
 
 ```js
@@ -233,21 +242,38 @@ function getScope() {
   return scope;           //  返回的是局部变量而不是全局变量
 }
 getScope();               //  “local”
-
 ```
 
 ---
 
 ### 声明提前
+在函数内声明的所有变量，始终是可见的。这意味着变量在声明之前甚至已经可用。
+这个特性被非正式地称为声明提前。
 
 ---
 
-### 作为属性
+### 声明前可用
+
+```js
+function output() {
+  console.log( i );                // undefined
+  var i = 9;
+  console.log( i );                // 9
+}
+output();
+
+```
+---
+
+### 属性变量
+
+```js
+var obj = {};
+obj.one = 1;                          // one 是一个变量，同时又是 obj 上一个属性
+this.two = 2;                         // two 是全局对象上定义一个属性
+var three = obj.one + this.two;       // 定义一个变量并赋值 3
+```
 
 ---
 
-### 作用域链
-
----
-
-### 下一节 运算符
+### 本节完

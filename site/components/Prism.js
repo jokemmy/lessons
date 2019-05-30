@@ -32,20 +32,26 @@ const createCode = ( prism ) => function({ theme, children, highLightLines, ...r
         padding: '0 1em'
       }
     };
-    if ( Array.isArray( highLightLines ) && highLightLines.includes( lineNumber )) {
-      Object.assign( props.style, {
-        backgroundColor: 'rgb(53, 59, 69)'
-      });
+
+    if ( typeof highLightLines === 'string' ) {
+      const lines = highLightLines.split( ',' ).map( num => parseInt( num )).filter( n => n );
+      if ( lines.length && lines.includes( lineNumber )) {
+        Object.assign( props.style, {
+          backgroundColor: 'rgb(53, 59, 69)'
+        });
+      }
     }
+
     return props;
   }
 
   if ( restProps.fontSize ) {
-    [ 'pre[class*="language-"]', 'code[class*="language-"]' ].map(( key ) => style[key]).filter( s => s ).map(( key ) => {
-      const tagStyle = { ...style[key] };
-      tagStyle.fontSize = restProps.fontSize;
-      style[key] = tagStyle;
-    })
+    [ 'pre[class*="language-"]', 'code[class*="language-"]' ]
+      .map(( key ) => style[key]).filter( s => s ).map(( key ) => {
+        const tagStyle = { ...style[key] };
+        tagStyle.fontSize = restProps.fontSize;
+        style[key] = tagStyle;
+      })
   }
 
   return <Highlighter {...themePrism} style={style} {...restProps}>{codeString}</Highlighter>;
