@@ -1,6 +1,5 @@
 
-import { Flex, Box } from 'rebass';
-import { Appear } from '@mdx-deck/components'
+import { Box, Flex } from 'rebass';
 
 
 ## 1.3 表达式和运算符
@@ -75,4 +74,59 @@ new Object        // 创建时不需要参数时括号可以省略
 
 ---
 
+<Box style={{ fontSize: '0.6em' }}>
+
+运算符 | 操作 | 类型
+:-:|:-:|:-:
+++ | 前/后增量 | value -> num
+-- | 前/后减量 | value -> num
+- | 求反 | num -> num
++ | 转换为数字 | num -> num
+~ | 按位求反 | int -> int
+! | 逻辑非 | any -> bool
+delete | 删除属性 | value -> bool
+typeof | 检测值类型 | any -> str
+void | 返回undefined | any -> undef
+
+</Box>
+
+---
+
+<Flex style={{ fontSize: '0.5em' }}>
+  <Box p={3}>
+
+  运算符 | 操作 | 类型
+  :-:|:-:|:-:
+  *  /  % | 乘 除 求余 | num,num -> num
+  +  - | 加 减 | num,num -> num
+  + | 字符串连接 | str,str -> str
+  << | 左移位 | int,int -> int
+  >> | 有符号右移 | int,int -> int
+  >>> | 无符号右移 | int,int -> int
+  < <= > >= | 比较数字顺序 | num,num -> bool
+  < <= > >= | 比较在字母表中的顺序 | str,str -> bool
+  instanceof | 测试对象类 | obj,func -> bool
+  in | 测试属性是否存在 | str,obj -> bool
+
+  </Box>
+  <Box p={3}>
+
+  运算符 | 操作 | 类型
+  :-:|:-:|:-:
+  == | 判断相等 | any,any -> bool
+  != | 判断不等 | any,any -> bool
+  === | 判断恒等 | any,any -> bool
+  !== | 判断非恒等 | any,any -> bool
+  & | 按位与 | int,int -> int
+  ^ | 按位异或 | int,int -> int
+  \| | 按位或 | int,int -> int
+  && | 逻辑与 | any,any -> any
+  \|\| | 逻辑或 | any,any -> any
+  ?: | 条件运算符 | bool,any,any -> any
+  =                       | 变量赋值或属性赋值 | value,any -> any
+  <div>*= /= %= += -= &=</div><div>^= \|= <<= >>= >>>=</div> | 运算并且赋值 | value,any -> any
+  , | 忽略第一个参数，返回第二个参数 | any,any -> any
+
+  </Box>
+</Flex>
 
