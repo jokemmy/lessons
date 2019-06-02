@@ -47,11 +47,12 @@ const createCode = ( prism ) => function({ theme, children, highLightLines, ...r
 
   if ( restProps.fontSize ) {
     [ 'pre[class*="language-"]', 'code[class*="language-"]' ]
-      .map(( key ) => style[key]).filter( s => s ).map(( key ) => {
-        const tagStyle = { ...style[key] };
-        tagStyle.fontSize = restProps.fontSize;
+      .map(( key ) => [ key, style[key]]).filter( s => s[1] ).forEach(([ key, styleValue ]) => {
+        const tagStyle = { ...styleValue };
+        const isNum = /^(0|[^0]\d*)(\.\d*)?$/.test( restProps.fontSize );
+        tagStyle.fontSize = `${restProps.fontSize}${isNum ? 'px' : ''}`;
         style[key] = tagStyle;
-      })
+      });
   }
 
   return <Highlighter {...themePrism} style={style} {...restProps}>{codeString}</Highlighter>;

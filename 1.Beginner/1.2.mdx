@@ -166,14 +166,22 @@ parseFloat( '0.1' )        //  0.1
 ```
 ---
 
+### 原始值
+
+Undefined、Null、Boolean、Number 和 String
+
+---
+
 ### 对象转换为原始值
+
 对象可以通过函数转换类型
 
 ```js
-({ x: 1 }).toString()           //  ${JSON.stringify(({ x: 1 }).toString())}
-[ 1, 2, 3 ].toString()          //  ${JSON.stringify([ 1, 2, 3 ].toString())}
-(function() {}).toString()      //  ${JSON.stringify((function(){}).toString())}
-new Date(2010,0,1).valueOf()    //  ${new Date(2010,0,1).valueOf()}
+({ x: 1, valueOf: function() { return this.x; }}).valueOf()   //  ${({ x: 1, valueOf: function() { return this.x; }}).valueOf()}
+({ x: 1 }).toString()                                         //  ${JSON.stringify(({ x: 1 }).toString())}
+[ 1, 2, 3 ].toString()                                        //  ${JSON.stringify([ 1, 2, 3 ].toString())}
+(function() {}).toString()                                    //  ${JSON.stringify((function(){}).toString())}
+new Date(2010,0,1).valueOf()                                  //  ${new Date(2010,0,1).valueOf()}
 ```
 
 ---
