@@ -177,7 +177,7 @@ undefined == null                               // ${undefined == null}
 
 ---
 
-### 一般情况下请使用 === 和 !==
+### 一般情况下建议使用 === 和 !==
 
 ```js
 1 == { valueOf: function() { return 1; }}       // ${1 == { valueOf: function() { return 1; }}}
@@ -187,3 +187,70 @@ undefined == null                               // ${undefined == null}
 false == 0                                      // ${false == 0}
 undefined == null                               // ${undefined == null}
 ```
+
+---
+
+### 比较运算符
+
+大于(>) 小于(<) 大于等于(>=) 小于等于(<=)
+
+---
+
+### 操作数类型
+
+操作数可能是任意类型，然而只有数字和字符串才能真正执行。操作数不是数字和字符串的话将进行类型转换。
+
+---
+
+```js
+// 按照规则进行类型转换然后执行比较
+{ valueOf: function() { return 1; }} > 0      // ${{ valueOf: function() { return 1; }} > 0}
+{} > 0                                        // ${{} > 0}
+[] > 0                                        // ${[] > 0}
+function() {} > 0                             // ${function() {} > 0}
+// 如果两个操作数都是字符串,那么就按照字母表的顺序进行比较
+// 如果两个操作数中有一个不是字符串则都转换为数字做比较
+'1' > 2                                       // ${'1' > 2}
+'1' > '2'                                     // ${'1' > '2'}
+{ valueOf: function() { return 1; }} > 2      // ${{ valueOf: function() { return 1; }} > 2}
+{ toString: function() { return '3'; }} > 2   // ${{ toString: function() { return '3'; }} > 2}
+```
+
+---
+
+### 字符串比较方法
+
+```js
+// 大写ASCII字母都小于小写的ASCII字母
+'A' < 'a'                   // ${'A' < 'a'}
+// 所以通常不区分字符大小写比较的情况下先把字符串转成大写或者小写在比较
+'Zoo'.toLowerCase() < 'arrdvark'.toLowerCase()  // ${'Zoo'.toLowerCase() < 'arrdvark'.toLowerCase()}
+'Zoo' < 'arrdvark'                              // ${'Zoo' < 'arrdvark'}
+// String.localeCompare 方法更加壮实可靠，这个方法参照本地的字母表定义的字母次序
+'ä'.localeCompare( 'z', 'de' )   // ${'ä'.localeCompare( 'z', 'de' )}
+'ä'.localeCompare( 'z', 'sv' )   // ${'ä'.localeCompare( 'z', 'sv' )}
+
+var list = [ 'abc', 'bca', 'cab', 'acb', 'bac', 'cba' ];
+list.sort( function( a, b ) { return a.localeCompare( b ); });  // 正序排列
+// ${JSON.stringify( [ 'abc', 'bca', 'cab', 'acb', 'bac', 'cba' ].sort( function( a, b ) { return a.localeCompare( b ); }))}
+list.sort( function( a, b ) { return b.localeCompare( a ); });  // 逆序排列
+// ${JSON.stringify( [ 'abc', 'bca', 'cab', 'acb', 'bac', 'cba' ].sort( function( a, b ) { return b.localeCompare( a ); }))}
+```
+
+---
+
+### <= 和 >=
+
+这里的等于不同于 == 和 === 的比较规则，只是简单的"不大于"和“不小于”。
+
+---
+
+### NaN 作为操作数
+
+当有操作数为 NaN 时运算结果均为 false。
+
+---
+
+### in 运算符
+
+
