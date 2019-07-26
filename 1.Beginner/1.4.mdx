@@ -253,4 +253,44 @@ list.sort( function( a, b ) { return b.localeCompare( a ); });  // 逆序排列
 
 ### in 运算符
 
+左侧操作数为字符串，右侧操作数为对象，如果右侧操作数拥有一个名为左侧操作数值的属性，那么表达式返回true。
 
+---
+
+### in 的目标是属性名不是值
+```js
+'a' in { a: 1 }          // ${'a' in { a: 1 }}
+'toString' in {}         // ${'toString' in {}}
+
+'0' in [ 1, 2, 3 ]       // ${'0' in [ 1, 2, 3 ]}
+1 in [ 1, 2, 3 ]         // ${1 in [ 1, 2, 3 ]}
+1 in [ 1 ]               // ${1 in [1]}
+```
+
+---
+
+### instanceof 运算符
+
+左侧的对象是右侧类的实例则表达式返回true，否则返回false
+
+---
+
+### 所有对象都是 Object 的实例
+
+```js
+const a = new Date;
+a instanceof Object       // ${new Date instanceof Object}
+a instanceof Date         // ${new Date instanceof Date}
+[] instanceof Object      // ${[] instanceof Object}
+a instanceof Array        // ${new Date instanceof Array}
+```
+
+---
+
+### instanceof 工作原理
+
+```js
+o instanceof f
+// 在 f 的原型链上查找 o, 如果 o 是 f 或者父类的实例则返回 true
+// 这里涉及到<原型链>的概念，我会在初级教程2.4节中详细介绍
+```
