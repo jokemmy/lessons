@@ -31,7 +31,7 @@
     "core-js": "^2.6.9",
     "emotion-theming": "^10.0.10",
     "friendly-errors-webpack-plugin": "^1.7.0",
-    "lodash.merge": "^4.6.1",
+    "lodash.merge": "^4.6.2",
     "mini-css-extract-plugin": "^0.7.0",
     "webpack": "^4.32.2",
     "webpack-cli": "^3.3.2",
